@@ -22,6 +22,7 @@ FileInNOut는 파일 저장소, 실시간 문서 편집, 채팅, 알림, 그룹 
 - [환경 변수](#환경-변수)
 - [성능 테스트와 문서](#성능-테스트와-문서)
 - [운영 체크리스트](#운영-체크리스트)
+- [서비스 시나리오 및 기능 데모](#서비스-시나리오-및-기능-데모)
 
 ## 서비스 개요
 
@@ -321,3 +322,63 @@ npm run build
 ## 배포 테스트
 
 <img width="1024" height="456" alt="blue_green" src="https://github.com/user-attachments/assets/c7277fa9-9027-4dfe-8772-2aafdd148eb5" />
+
+## 서비스 시나리오 및 기능 데모
+
+FileInNOut는 사용자가 협업 공간에 참여해 파일과 문서를 관리하고, 채팅과 알림으로 팀원과 소통하는 흐름을 중심으로 구성했습니다. 아래 항목을 펼치면 기능 구현 당시의 데모를 볼 수 있습니다.
+
+> 데모 GIF는 팀 원본 프로젝트의 기능 시연 자료를 연결했습니다.
+
+<details>
+<summary>1. 협업 시작: 회원가입과 로그인</summary>
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/beyond-sw-camp/be24-3rd-ShakeShackFile-In-N-Out-File/main/images/user_auth.gif" width="850" alt="회원가입과 로그인 데모" />
+  <p>회원가입과 로그인 후 JWT 기반 인증 흐름으로 협업 공간에 진입합니다. OAuth 로그인도 함께 지원합니다.</p>
+</div>
+</details>
+
+<details>
+<summary>2. 작업 정리: 파일과 문서 관리</summary>
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/beyond-sw-camp/be24-3rd-ShakeShackFile-In-N-Out-File/main/images/file.gif" width="850" alt="파일과 문서 관리 데모" />
+  <p>폴더 트리 안에서 파일을 업로드·다운로드하고, 문서를 생성해 파일과 연결된 작업 흐름을 관리합니다.</p>
+</div>
+</details>
+
+<details>
+<summary>3. 협업 중 소통: 실시간 채팅</summary>
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/beyond-sw-camp/be24-3rd-ShakeShackFile-In-N-Out-File/main/images/chat.gif" width="850" alt="실시간 채팅 데모" />
+  <p>텍스트뿐 아니라 이미지와 파일을 메시지로 주고받고, 읽음 상태와 알림을 통해 대화 맥락을 확인합니다.</p>
+</div>
+</details>
+
+<details>
+<summary>4. 함께 작성: 실시간 문서 편집</summary>
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/beyond-sw-camp/be24-3rd-ShakeShackFile-In-N-Out-File/main/images/editor.gif" width="850" alt="실시간 문서 편집 데모" />
+  <p>블록 기반 에디터에서 문서를 작성하고, Yjs 기반 동시 편집으로 여러 사용자의 변경 사항을 공유합니다.</p>
+</div>
+</details>
+
+<details>
+<summary>5. 협업 대상 구성: 그룹, 초대, 공유</summary>
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/beyond-sw-camp/be24-3rd-ShakeShackFile-In-N-Out-File/main/images/group.gif" width="850" alt="그룹과 공유 데모" />
+  <p>관계 요청과 그룹 초대를 바탕으로 협업 대상을 구성하고, 파일·채팅·워크스페이스의 공유 범위를 관리합니다.</p>
+</div>
+</details>
+
+<details>
+<summary>6. 놓치지 않기: 알림과 스토리지 확장</summary>
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/beyond-sw-camp/be24-3rd-ShakeShackFile-In-N-Out-File/main/images/notification.gif" width="850" alt="알림과 스토리지 확장 데모" />
+  <p>초대·공유·채팅과 관련된 상태를 실시간 알림으로 확인하고, 필요에 따라 스토리지 용량을 확장하는 흐름을 제공합니다.</p>
+</div>
+</details>
