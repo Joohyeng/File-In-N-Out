@@ -33,14 +33,7 @@ const myProfileImageUrl = computed(() => authStore.user?.profileImageUrl || null
 const myName = computed(() => authStore.user?.userName || authStore.user?.name || 'Guest')
 const DELETED_MESSAGE_TEXT = '삭제된 메시지입니다.'
 
-const isDeletedMessagePayload = (payload = {}) => (
-  Boolean(payload.deleted) ||
-  (
-    String(payload.contents ?? payload.text ?? '').trim() === DELETED_MESSAGE_TEXT &&
-    !payload.fileUrl &&
-    !payload.fileName
-  )
-)
+const isDeletedMessagePayload = (payload = {}) => Boolean(payload.deleted)
 
 const toChatMessage = (payload = {}, options = {}) => {
   const deleted = isDeletedMessagePayload(payload)
@@ -49,6 +42,7 @@ const toChatMessage = (payload = {}, options = {}) => {
 
   return {
     id: payload.idx ?? payload.id,
+    senderIdx: payload.senderIdx ?? null,
     sender: payload.senderNickname ?? payload.sender ?? myName.value,
     text: deleted ? DELETED_MESSAGE_TEXT : (payload.contents ?? payload.text ?? ''),
     time: payload.createdAt ?? payload.time ?? new Date().toISOString(),
@@ -275,8 +269,24 @@ const initChat = () => {
 
         // 읽음 업데이트
         if (data.type === 'READ_UPDATE') {
+          const readUserIdx = Number(data.userIdx)
+          const lastReadMessageId = Number(data.lastReadMessageId)
+
+          if (!Number.isFinite(readUserIdx) || !Number.isFinite(lastReadMessageId)) {
+            return
+          }
+
           chatMessages.value.forEach(msg => {
-            if (!msg.isPending && msg.messageUnreadCount > 0) {
+            const messageId = Number(msg.id)
+            const senderIdx = Number(msg.senderIdx)
+
+            if (
+              !msg.isPending &&
+              Number.isFinite(messageId) &&
+              messageId <= lastReadMessageId &&
+              senderIdx !== readUserIdx &&
+              msg.messageUnreadCount > 0
+            ) {
               msg.messageUnreadCount -= 1
             }
           })
