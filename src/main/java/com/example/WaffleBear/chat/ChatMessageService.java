@@ -158,11 +158,20 @@ public class ChatMessageService {
 
         chatMessageRepository.findTopByChatRoomsIdxOrderByCreatedAtDesc(roomIdx)
                 .ifPresent(msg -> {
+                    Long lastReadMessageId = participant.getLastReadMessageId();
+                    if (lastReadMessageId != null && lastReadMessageId >= msg.getIdx()) {
+                        return;
+                    }
+
                     participant.updateLastReadMessageId(msg.getIdx());
 
                     stompPublisher.send(
                             "/sub/chat/room/" + roomIdx,
-                            Map.of("type", "READ_UPDATE", "userIdx", userIdx)
+                            Map.of(
+                                    "type", "READ_UPDATE",
+                                    "userIdx", userIdx,
+                                    "lastReadMessageId", msg.getIdx()
+                            )
                     );
                 });
         chatRoomService.evictChatListCachesByRoom(roomIdx);

@@ -73,6 +73,7 @@ public class ChatMessagesDto {
         private String fileType;     // 추가
         private Long fileSize;       // 추가
         private String messageType;  // 추가
+        private boolean deleted;
 
         public static ListRes from(ChatMessages entity, int messageUnreadCount, String profileImageUrl) {
             return ListRes.builder()
@@ -88,6 +89,7 @@ public class ChatMessagesDto {
                     .fileType(entity.getFileType())
                     .fileSize(entity.getFileSize())
                     .messageType(entity.getMessageType() != null ? entity.getMessageType().name() : "TEXT")
+                    .deleted(entity.isDeleted())
                     .build();
         }
         // 기존 from() 오버로딩 (readCount 없는 버전)
